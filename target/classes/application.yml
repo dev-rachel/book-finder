@@ -1,4 +1,0 @@
-spring.profiles: default
-kakao.book.search: https://dapi.kakao.com/v2/search/book
-kakao.app.key: KakaoAK 92f47ac3e923ee813bce89b815580403
----
