@@ -6,14 +6,15 @@ import hyunjin.bookfinder.validator.UserValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+import javax.ws.rs.BeanParam;
+
+@Controller
 public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -25,7 +26,7 @@ public class UserController {
     private UserValidator userValidator;
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") UserBean user, BindingResult bindingResult) {
+    public String registration(@RequestBody UserBean user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -37,8 +38,8 @@ public class UserController {
         return "sign up";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("userForm") UserBean user) {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(@BeanParam UserBean user) {
 
         userService.login(user.getUsername(), user.getPassword());
 
