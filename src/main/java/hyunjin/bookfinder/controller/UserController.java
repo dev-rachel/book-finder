@@ -42,6 +42,6 @@ public class UserController {
 
         userService.login(user.getUsername(), user.getPassword());
 
-        return "sign up";
+        return "log in";
     }
 }
