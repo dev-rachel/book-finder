@@ -1,7 +1,9 @@
 package hyunjin.bookfinder.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.Column;
@@ -11,12 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Entity
 @Table(name = "E_SEARCH_HISTORY")
 @JsonPropertyOrder({
-        "search_id", "user_id", "search_data", "created_date"
+        "search_id", "user_id", "search_data", "result", "created_date"
 })
 public class SearchHistory {
     @JsonProperty("search_id")
@@ -25,6 +28,10 @@ public class SearchHistory {
     private Long userId;
     @JsonProperty("search_data")
     private String searchData;
+    @JsonIgnore
+    private String result;
+    @JsonProperty("result")
+    private JsonNode resultJson;
     @JsonProperty("created_date")
     private Date createdDate;
 
@@ -56,6 +63,24 @@ public class SearchHistory {
 
     public void setSearchData(String searchData) {
         this.searchData = searchData;
+    }
+
+    @Column(name = "RESULT")
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    @Transient
+    public JsonNode getResultJson() {
+        return resultJson;
+    }
+
+    public void setResultJson(JsonNode resultJson) {
+        this.resultJson = resultJson;
     }
 
     @Column(name = "CREATED_DATE")

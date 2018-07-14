@@ -3,9 +3,18 @@ package hyunjin.bookfinder.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SearchBaseBean {
+    private Long userId;
     private Integer page;
     private Integer size;
     private String sort;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public Integer getPage() {
         return page;

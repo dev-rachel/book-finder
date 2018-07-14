@@ -1,20 +1,27 @@
 package hyunjin.bookfinder.controller;
 
 import hyunjin.bookfinder.model.UserBean;
+import hyunjin.bookfinder.model.entity.SearchHistory;
+import hyunjin.bookfinder.service.SearchService;
 import hyunjin.bookfinder.service.UserService;
+import hyunjin.bookfinder.util.JsonUtil;
 import hyunjin.bookfinder.validator.UserValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.ws.rs.BeanParam;
+import java.util.List;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -24,6 +31,9 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private SearchService searchService;
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String registration(@RequestBody UserBean user, BindingResult bindingResult) {
@@ -44,5 +54,12 @@ public class UserController {
         userService.login(user.getUsername(), user.getPassword());
 
         return "log in";
+    }
+
+    @GetMapping("/{user_id}/book/search")
+    public String findRecentHistory(@PathVariable("user_id") long userId) {
+
+        List<SearchHistory> result = searchService.findRecentHistory(userId);
+        return JsonUtil.toJsonString(result);
     }
 }

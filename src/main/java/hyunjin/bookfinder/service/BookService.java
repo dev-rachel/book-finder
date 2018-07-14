@@ -34,9 +34,7 @@ public class BookService extends ApiRequestService {
                 .build().encode().toString();
 
         ResponseEntity<Object> responseEntity = requestApi(uriStr, headers, HttpMethod.GET, "", null);
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            //TODO : search history 기록 쌓기
-        }
+
         //TODO : 검색결과  integer로 보이는 얘들 string으로 변경(category)
         return JsonUtil.fromJson(Objects.toString(responseEntity.getBody(), null));
     }
