@@ -1,4 +1,17 @@
 spring.profiles: default
 kakao.book.search: https://dapi.kakao.com/v2/search/book
 kakao.app.key: KakaoAK 92f47ac3e923ee813bce89b815580403
+
+
+spring.jpa.hibernate.ddl-auto: none
+
+# Database settings
+spring.jpa.database: oracle
+spring.jpa.database-platform: org.hibernate.dialect.OracleDialect
+
+spring.datasource.url: jdbc:oracle:thin:@localhost:1522:orcl
+spring.datasource.username: HIBERNATE_TEST
+spring.datasource.password: HIBERNATE_TEST
+
+
 ---

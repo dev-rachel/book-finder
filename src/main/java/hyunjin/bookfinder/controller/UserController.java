@@ -4,7 +4,7 @@ import hyunjin.bookfinder.model.UserBean;
 import hyunjin.bookfinder.model.entity.SearchHistory;
 import hyunjin.bookfinder.service.SearchService;
 import hyunjin.bookfinder.service.UserService;
-import hyunjin.bookfinder.util.JsonUtil;
+import hyunjin.bookfinder.util.JsonUtils;
 import hyunjin.bookfinder.validator.UserValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +60,6 @@ public class UserController {
     public String findRecentHistory(@PathVariable("user_id") long userId) {
 
         List<SearchHistory> result = searchService.findRecentHistory(userId);
-        return JsonUtil.toJsonString(result);
+        return JsonUtils.toJsonString(result);
     }
 }

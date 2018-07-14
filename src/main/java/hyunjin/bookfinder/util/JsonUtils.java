@@ -18,8 +18,8 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.Date;
 
-public class JsonUtil {
-    private static Logger logger = LoggerFactory.getLogger(JsonUtil.class);
+public class JsonUtils {
+    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
     private static final ObjectMapper sharedObjectMapper = createDefaultMapper();
 
     @Nonnull

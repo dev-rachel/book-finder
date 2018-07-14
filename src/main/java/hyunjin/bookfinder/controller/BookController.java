@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import hyunjin.bookfinder.model.BookBean;
 import hyunjin.bookfinder.service.BookService;
 import hyunjin.bookfinder.service.SearchService;
-import hyunjin.bookfinder.util.JsonUtil;
+import hyunjin.bookfinder.util.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +38,6 @@ public class BookController {
             searchService.saveHistory(book, bookSearch);
         }
 
-        return JsonUtil.toJsonString(book);
+        return JsonUtils.toJsonString(book);
     }
 }
