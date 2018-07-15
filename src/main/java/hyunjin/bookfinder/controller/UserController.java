@@ -11,9 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.ws.rs.BeanParam;
 import java.util.List;
@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private SearchService searchService;
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @PostMapping(value = "/signup")
     public String registration(@RequestBody UserBean user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
 
@@ -44,7 +44,7 @@ public class UserController {
         return "sign up";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String login(@BeanParam UserBean user) {
 
         userService.login(user.getUsername(), user.getPassword());
