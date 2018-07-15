@@ -21,7 +21,6 @@ public class BookService extends ApiRequestService {
     protected String appKey;
 
     public JsonNode search(HttpHeaders headers, BookBean bookSearch) throws Exception {
-
         headers.add("Authorization", appKey);
 
         String uriStr = UriComponentsBuilder

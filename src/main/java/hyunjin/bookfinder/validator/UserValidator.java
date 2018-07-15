@@ -23,7 +23,6 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-
         UserBean user = (UserBean) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
@@ -33,6 +32,5 @@ public class UserValidator implements Validator {
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-
     }
 }

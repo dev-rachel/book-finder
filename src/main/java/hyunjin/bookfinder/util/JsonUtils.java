@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.util.Date;
 
 public class JsonUtils {
-    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
     private static final ObjectMapper sharedObjectMapper = createDefaultMapper();
+    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
     @Nonnull
     private static ObjectMapper createDefaultMapper() {

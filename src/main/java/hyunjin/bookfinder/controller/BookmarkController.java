@@ -31,14 +31,24 @@ public class BookmarkController {
     @PostMapping("/user/{user_id}/book/{book_id}")
     public String create(@RequestBody BookmarkBean bookmark, @PathVariable("user_id") long userId, @PathVariable("book_id") long bookId) {
 
+        logger.info("request data : {}, user_id : {}, book_id : {}", bookmark, userId, bookId);
+
         Bookmark result = bookmarkService.create(bookmark, userId, bookId);
+
+        logger.info("result : {}", result);
+
         return JsonUtils.toJsonString(result);
     }
 
     @GetMapping
     public String read(@BeanParam SearchBaseBean search) {
 
+        logger.info("request data : {}", search);
+
         List<Bookmark> result = bookmarkService.findAll(search);
+
+        logger.info("result : {}", result);
+
         return JsonUtils.toJsonString(result);
     }
 
@@ -46,7 +56,12 @@ public class BookmarkController {
     public String delete(@PathVariable("bookmark_id") long bookmarkId) {
 
         try {
+            logger.info("request data : {}", bookmarkId);
+
             bookmarkService.delete(bookmarkId);
+
+            logger.info("{}bookmark delete", bookmarkId);
+
             return bookmarkId + "bookmark delete";
         } catch (Exception e) {
             return e.getMessage();

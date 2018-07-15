@@ -30,7 +30,6 @@ public class BookmarkService {
 
     @Transactional
     public Bookmark create(BookmarkBean bookmarkInfo, long userId, long bookId) {
-
         Bookmark bookmark = new Bookmark();
         bookmark.setUserId(userId);
         bookmark.setBookId(bookId);
@@ -55,7 +54,6 @@ public class BookmarkService {
     }
 
     public List<Bookmark> findAll(SearchBaseBean search) {
-
         Pageable pageRequest = PageRequest.of(TypeUtils.getDefault(search.getPage(), 1) - 1,
                 TypeUtils.getDefault(search.getSize(), 10),
                 new Sort(Sort.Direction.DESC, StringUtils.defaultString(search.getSort(), "createdDate")));

@@ -21,14 +21,12 @@ public class ApiRequestService {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private RestTemplate getRestTemplateNoneInterceptor() {
-
         this.restTemplateNoneInterceptor.setErrorHandler(new RestErrorHandler());
         return this.restTemplateNoneInterceptor;
     }
 
     public <T> ResponseEntity<T> requestApi(
             String url, HttpHeaders headers, HttpMethod method, Object body, Class<T> retCls) throws Exception {
-
         logger.info("API URL : {}", url);
         return getRestTemplateNoneInterceptor().exchange(
                 url,
