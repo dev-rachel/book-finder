@@ -10,7 +10,6 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.Optional;
 
@@ -19,14 +18,8 @@ public class UserService {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private EntityManager entityManager;
     @Autowired
     private UserRepository userRepository;
-
-    public UserService(EntityManager entityManager) {
-
-        this.entityManager = entityManager;
-    }
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -38,7 +31,7 @@ public class UserService {
         user.setUsername(userInfo.getUsername());
         user.setPassword(userInfo.getPassword());
         user.setCreatedDate(new Date());
-        entityManager.persist(user);
+        userRepository.save(user);
 
         logger.info("new user ID : {}", user.getUserId());
 

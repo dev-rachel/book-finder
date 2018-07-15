@@ -15,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import javax.ws.rs.core.NoContentException;
 import java.util.Date;
 import java.util.List;
@@ -26,14 +25,8 @@ public class BookmarkService {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private EntityManager entityManager;
     @Autowired
     private BookmarkRepository bookmarkRepository;
-
-    public BookmarkService(EntityManager entityManager) {
-
-        this.entityManager = entityManager;
-    }
 
     @Transactional
     public Bookmark create(BookmarkBean bookmarkInfo, long userId, long bookId) {
@@ -43,7 +36,7 @@ public class BookmarkService {
         bookmark.setBookId(bookId);
         bookmark.setUri(bookmarkInfo.getUri());
         bookmark.setCreatedDate(new Date());
-        entityManager.persist(bookmark);
+        bookmarkRepository.save(bookmark);
 
         logger.info("new bookmark ID : {}", bookmark.getBookmarkId());
 
@@ -57,7 +50,7 @@ public class BookmarkService {
         );
         Optional.of(bookmark).ifPresent(value -> {
             value.setDeletedDate(new Date());
-            entityManager.persist(value);
+            bookmarkRepository.save(value);
         });
     }
 

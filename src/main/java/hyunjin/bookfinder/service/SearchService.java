@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriUtils;
 
-import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.List;
 
@@ -21,15 +20,8 @@ public class SearchService {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private EntityManager entityManager;
-
     @Autowired
     private SearchHistoryRepository searchHistoryRepository;
-
-    public SearchService(EntityManager entityManager) {
-
-        this.entityManager = entityManager;
-    }
 
     @Transactional
     public SearchHistory saveHistory(JsonNode book, BookBean bookSearch) {
@@ -39,7 +31,7 @@ public class SearchService {
         history.setResultJson(book);
         history.setResult(JsonUtils.toJsonString(book));
         history.setCreatedDate(new Date());
-        entityManager.persist(history);
+        searchHistoryRepository.save(history);
 
         logger.info("new search history ID : {}", history.getSearchId());
 
