@@ -1,8 +1,5 @@
 package hyunjin.bookfinder.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -18,27 +15,23 @@ import java.util.Date;
 
 @Entity
 @Table(name = "E_SEARCH_HISTORY")
-@JsonPropertyOrder({
-        "search_id", "user_id", "search_data", "result", "created_date"
-})
 public class SearchHistory {
-    @JsonProperty("search_id")
-    private Long searchId;
-    @JsonProperty("user_id")
-    private Long userId;
-    @JsonProperty("search_data")
-    private String searchData;
-    @JsonIgnore
-    private String result;
-    @JsonProperty("result")
-    private JsonNode resultJson;
-    @JsonProperty("created_date")
-    private Date createdDate;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genID")
     @SequenceGenerator(name = "genID", sequenceName = "SEARCH_HISTORY_SEQ", allocationSize = 1)
     @Column(name = "SEARCH_ID", unique = true, nullable = false)
+    private Long searchId;
+    @Column(name = "USER_ID")
+    private Long userId;
+    @Column(name = "SEARCH_DATA")
+    private String searchData;
+    @Column(name = "RESULT")
+    private String result;
+    @Transient
+    private JsonNode resultJson;
+    @Column(name = "CREATED_DATE")
+    private Date createdDate;
+
     public Long getSearchId() {
         return searchId;
     }
@@ -47,7 +40,6 @@ public class SearchHistory {
         this.searchId = searchId;
     }
 
-    @Column(name = "USER_ID")
     public Long getUserId() {
         return userId;
     }
@@ -56,7 +48,6 @@ public class SearchHistory {
         this.userId = userId;
     }
 
-    @Column(name = "SEARCH_DATA")
     public String getSearchData() {
         return searchData;
     }
@@ -65,7 +56,6 @@ public class SearchHistory {
         this.searchData = searchData;
     }
 
-    @Column(name = "RESULT")
     public String getResult() {
         return result;
     }
@@ -74,7 +64,6 @@ public class SearchHistory {
         this.result = result;
     }
 
-    @Transient
     public JsonNode getResultJson() {
         return resultJson;
     }
@@ -83,7 +72,6 @@ public class SearchHistory {
         this.resultJson = resultJson;
     }
 
-    @Column(name = "CREATED_DATE")
     public Date getCreatedDate() {
         return createdDate;
     }
